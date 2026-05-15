@@ -8,7 +8,9 @@ WORKDIR /app
 # Copia TODOS os arquivos do projeto para dentro do container
 COPY . .
 
-RUN ls -la
+RUN mvn package -DskipTests
+
+EXPOSE 8080
 
 # Dá permissão de execução ao Maven Wrapper
 RUN chmod +x mvnw
@@ -21,4 +23,4 @@ RUN ./mvnw clean package -DskipTests
 
 # Comando para iniciar a aplicação Quarkus
 # Executa o JAR gerado dentro da pasta target/quarkus-app
-CMD ["sh", "-c", "java -jar target/quarkus-app/quarkus-run.jar"]
+CMD ["java", "-jar", "target/quarkus-app/quarkus-run.jar"]
